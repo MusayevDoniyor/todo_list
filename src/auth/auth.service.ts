@@ -44,11 +44,11 @@ export class AuthService {
     }
 
     const isPasswordMatch = await bcrypt.compare(
-      user.password,
       dto.password as string,
+      user.password,
     );
 
-    if (isPasswordMatch) {
+    if (!isPasswordMatch) {
       throw new UnauthorizedException('Invalid password.');
     }
 

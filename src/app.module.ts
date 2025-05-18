@@ -13,6 +13,7 @@ import { join } from 'path';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env', 'example.env'],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
