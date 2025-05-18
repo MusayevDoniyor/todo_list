@@ -1,0 +1,34 @@
+type TodoModel {
+  id: String!
+  title: String!
+  completed: Boolean!
+  user: Users!
+  created_at: DateTime!
+}
+
+type Query {
+  myTodos: [TodoModel!]!
+  getTodo(id: String!): TodoModel
+  me: Users!
+}
+
+type DeleteTodoResponse {
+  message: String!
+  todo: TodoModel!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): TodoModel!
+  updateTodo(updateTodoInput: UpdateTodoInput!): TodoModel!
+  toggleTodo(id: String!): TodoModel!
+  deleteTodo(id: String!): DeleteTodoResponse!
+}
+
+input CreateTodoInput {
+  title: String!
+}
+
+input UpdateTodoInput {
+  id: String!
+  title: String
+}

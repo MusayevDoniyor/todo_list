@@ -21,16 +21,13 @@ export class AuthService {
 
   async register(dto: UserRegisterDto) {
     const isUserExists = await this.userRepo.findOneBy({ email: dto.email });
-    console.log(isUserExists);
 
     if (isUserExists) {
       throw new ConflictException('This email is already in use.');
     }
 
     const user = this.userRepo.create(dto);
-    console.log(user);
     await this.userRepo.save(user);
-    console.log(user);
 
     return {
       message: 'User registered successfully',
@@ -39,7 +36,6 @@ export class AuthService {
   }
 
   async login(dto: UserLoginDto) {
-    console.log(process.env.JWT_SECRET_KEY);
     const user = await this.userRepo.findOneBy({ email: dto.email });
     if (!user) {
       throw new UnauthorizedException(
